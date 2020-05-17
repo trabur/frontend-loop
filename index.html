@@ -63,9 +63,9 @@ node.subgraph('subgraph').out('output').port('input').agent('agent')
               <img src="subnet_ex11.png" />
             </a>
           </div>
-  <pre><code class="language-js">function clone(base) {
-  base.import('input', (a) => {
-    base.exports('clone', a, a, a, a)
+  <pre><code class="language-js">function clone(flow) {
+  flow.import('input', (a) => {
+    flow.exports('clone', a, a, a, a)
   })
 }
 let node = fl.node('input-array-port')
@@ -85,10 +85,10 @@ node.agent('clone').ports('clone', '3').out('db_path3')
               <img src="subnet_ex15.png" />
             </a>
           </div>
-<pre><code class="language-js">function adder(base) {
-  base.imports('add', (a, b, c, d) => {
+<pre><code class="language-js">function adder(flow) {
+  flow.imports('add', (a, b, c, d) => {
     let value = a + b + c + d
-    base.export('output', value)
+    flow.export('output', value)
   })
 }
 let node = fl.node('input-array-port')
@@ -101,6 +101,26 @@ node.in('add3').ports('add', '3').agent('adder').port('output').out('output')
 // add1 => add[1] adder()
 // add2 => add[2] adder()
 // add3 => add[3] adder() output => output</code></pre>
+          <div style="text-align: center;">
+            <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#hierarchical-naming" target="_blank">
+              <img src="subnet_ex13.png" />
+            </a>
+          </div>
+<pre><code class="language-js">function adder(flow) {
+  flow.imports('add', (a, b, c, d) => {
+    let value = a + b + c + d
+    flow.export('output', value)
+  })
+}
+let node = fl.node('input-array-port')
+node.in('add0').ports('add', '0').agent('adder', adder)
+node.in('add1').ports('add', '1').agent('adder')
+node.in('add2').ports('add', '2').agent('adder')
+node.in('add3').ports('add', '3').agent('adder').port('output').out('output')
+// --or--
+// input => input clone(${msg_clone})
+// clone() clone[0] -> a nand(${maths_boolean_nand})
+// clone() clone[1] -> b nand() output => output</code></pre>
         </div>
       </div>
       <br />
