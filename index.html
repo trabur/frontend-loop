@@ -61,11 +61,11 @@
             </a>
           </div>
 <pre><code class="language-js">function agent(flow) {
-  flow.import('input', (message) => {
-    console.log(`welcome, ${message}`)
+  flow.import('input', (name) => {
+    console.log(`welcome, ${name}`)
   })
 }
-let node = fl.node('initializing')
+let node = fl.node('initialize')
 node.subgraph('subgraph', subgraph)
 node.agent('agent', agent)
 node.subgraph('subgraph').port('output').port('input').agent('agent')
@@ -83,7 +83,7 @@ node.subgraph('subgraph').port('output').port('input').agent('agent')
     flow.exports('clone', a, a, a, a)
   })
 }
-let node = fl.node('first')
+let node = fl.node('duplicate')
 node.in('db_path').port('input').agent('clone', clone)
 node.agent('clone').ports('clone', '0').out('db_path0')
 node.agent('clone').ports('clone', '1').out('db_path1')
@@ -106,7 +106,7 @@ node.agent('clone').ports('clone', '3').out('db_path3')
     flow.export('output', value)
   })
 }
-let node = fl.node('second')
+let node = fl.node('operate')
 node.in('add0').ports('add', '0').agent('adder', adder)
 node.in('add1').ports('add', '1').agent('adder')
 node.in('add2').ports('add', '2').agent('adder')
@@ -130,7 +130,7 @@ node.in('add3').ports('add', '3').agent('adder').port('output').out('output')
     }
   })
 }
-let node = fl.node('third')
+let node = fl.node('duplicate-then-operate')
 node.in('input').port('input').agent('clone', clone)
 node.agent('clone').ports('clone', '0').ports('nand', 'a').agent('nand', nand)
 node.agent('clone').ports('clone', '1').ports('nand', 'b').agent('nand').port('output').out('output')
