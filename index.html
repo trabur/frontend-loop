@@ -32,8 +32,8 @@
                   <img src="subnet_ex9.png" />
                 </a>
               </div>
-<pre><code class="language-js">function agent(base) {
-  base.import('input', (message) => {
+<pre><code class="language-js">function agent(flow) {
+  flow.import('input', (message) => {
     console.log(`welcome, ${message}`)
   })
 }
