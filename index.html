@@ -64,13 +64,12 @@ node.subgraph('subgraph').out('output').port('input').agent('agent')
             </a>
           </div>
   <pre><code class="language-js">function clone(base) {
-  base.imports('input', (a, b, c, d) => {
-    let value = a + b + c + d
-    base.export('output', value)
+  base.import('input', (a) => {
+    base.exports('clone', a, a, a, a)
   })
 }
 let node = fl.node('input-array-port')
-node.in('add0').port('input').agent('clone', clone)
+node.in('db_path').port('input').agent('clone', clone)
 node.agent('clone').ports('clone', '0').out('db_path0')
 node.agent('clone').ports('clone', '1').out('db_path1')
 node.agent('clone').ports('clone', '2').out('db_path2')
