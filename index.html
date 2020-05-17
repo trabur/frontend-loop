@@ -124,9 +124,9 @@ node.in('add3').ports('add', '3').agent('adder').port('output').out('output')
 <pre><code class="language-js">function nand(flow) {
   flow.imports('nand', (a, b) => {
     if (a && b) {
-      flow.export('output', 0)
+      flow.export('output', false)
     } else {
-      flow.export('output', 1)
+      flow.export('output', true)
     }
   })
 }
