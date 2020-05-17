@@ -38,7 +38,7 @@
   })
 }
 let node = fl.node('initializing')
-node.subgraph('subgraph')
+node.subgraph('subgraph', subgraph)
 node.agent('agent', agent)
 node.subgraph('subgraph').port('output').port('input').agent('agent')
 // --or--
