@@ -22,29 +22,18 @@
         <div class="fortress">
           <div class="merlon"></div>
           <div class="parapet">
-            <h1 style="text-align: center; font-family: Open Sans, sans-serif">Distributed Programming<br />(using dataflow graphs)</h1>
+            <h1 style="text-align: center; font-family: Open Sans, sans-serif; margin-bottom: 0;">Distributed Programming</h1>
+            <div style="text-align: center;">
+              <h2 style="margin-top: 0;">(using dataflow graphs)</h2>
+              <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc" target="_blank">
+                <img src="subnet_ex10.png" />
+              </a>
+            </div>
           </div>
           <div class="machicolation"></div>
           <div class="wall">
             <div class="stones">
-              <div style="text-align: center;">
-                <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#initializing-a-subgraph-and-agent-then-connecting-them" target="_blank">
-                  <img src="subnet_ex9.png" />
-                </a>
-              </div>
-<pre><code class="language-js">function agent(flow) {
-  flow.import('input', (message) => {
-    console.log(`welcome, ${message}`)
-  })
-}
-let node = fl.node('initializing')
-node.subgraph('subgraph', subgraph)
-node.agent('agent', agent)
-node.subgraph('subgraph').port('output').port('input').agent('agent')
-// --or--
-// subgraph(${name_of_subgraph})
-// agent(${name_of_agent})
-// subgraph() output -> input agent()</code></pre>
+              <h2>the paradigm shift here is that we are coding the flow of data rather than the flow of control or logic. this level of abstraction and thinking requires that we make decisions about what Nodes and Edges are needed as dependancies. because of that each one of these graphs consists of an implementation and an interface. our interface is a simple library coded in JavaScript which describes the what and how of data flow through Agents and Subgraphs. we leave the final implementation up to the programmer.</h2>
             </div>
           </div>
           <div class="foundation">
@@ -58,6 +47,24 @@ node.subgraph('subgraph').port('output').port('input').agent('agent')
 
       <div class="dirt">
         <div style="margin: 2em; background-color: #fff; padding: 1em;">
+          <div style="text-align: center;">
+            <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#initializing-a-subgraph-and-agent-then-connecting-them" target="_blank">
+              <img src="subnet_ex9.png" />
+            </a>
+          </div>
+<pre><code class="language-js">function agent(flow) {
+  flow.import('input', (message) => {
+    console.log(`welcome, ${message}`)
+  })
+}
+let node = fl.node('initializing')
+node.subgraph('subgraph', subgraph)
+node.agent('agent', agent)
+node.subgraph('subgraph').port('output').port('input').agent('agent')
+// --or--
+// subgraph(${name_of_subgraph})
+// agent(${name_of_agent})
+// subgraph() output -> input agent()</code></pre>
           <div style="text-align: center;">
             <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#input-array-port" target="_blank">
               <img src="subnet_ex11.png" />
