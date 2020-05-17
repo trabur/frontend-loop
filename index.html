@@ -40,7 +40,7 @@
 let node = fl.node('initializing')
 node.subgraph('subgraph')
 node.agent('agent', agent)
-node.subgraph('subgraph').out('output').port('input').agent('agent')
+node.subgraph('subgraph').port('output').port('input').agent('agent')
 // --or--
 // subgraph(${name_of_subgraph})
 // agent(${name_of_agent})
