@@ -1,0 +1,53 @@
+
+.dirt {
+  margin: 0 -1em;
+  background: #9b7653;
+  overflow: hidden;
+}
+
+.fortress {
+  position: relative;
+  right: 50px;
+  left: 50px;
+}
+
+.fortress .merlon {
+  border-top: 30px dashed #fff;
+  width: calc(100% - 50px);
+  margin: 0 -25px;
+}
+
+.fortress .parapet {
+  background: #fff;
+  padding: 1em 0;
+  width: calc(100% - 50px);
+  margin: 0 -25px;
+}
+
+.fortress .machicolation {
+  border-top: 30px solid #fff;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  height: 0;
+  margin: 0 25px 0 -25px;
+  width: calc(100% - 100px);
+}
+
+.fortress .wall {
+  margin-top: 0;
+  background: #fff;
+  overflow: hidden;
+  width: calc(100% - 100px);
+}
+
+.fortress .wall .stones {
+  padding: 0 1em;
+}
+
+.fortress .foundation {
+  background: #fff;
+  padding: 1em 0;
+  width: calc(100% - 50px);
+  margin: 0 -25px;
+  text-align: center;
+}
