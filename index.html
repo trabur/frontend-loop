@@ -32,14 +32,14 @@
                   <img src="subnet_ex9.png" />
                 </a>
               </div>
-<pre><code class="language-js">function run(base) {
+<pre><code class="language-js">function agent(base) {
   base.import('input', (message) => {
     console.log(`welcome, ${message}`)
   })
 }
 let node = fl.node('initializing')
 node.subgraph('subgraph')
-node.agent('agent', run)
+node.agent('agent', agent)
 node.subgraph('subgraph').out('output').port('input').agent('agent')
 // --or--
 // subgraph(${name_of_subgraph})
@@ -58,6 +58,29 @@ node.subgraph('subgraph').out('output').port('input').agent('agent')
 
       <div class="dirt">
         <div style="margin: 2em; background-color: #fff; padding: 1em;">
+          <div style="text-align: center;">
+            <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#input-array-port" target="_blank">
+              <img src="subnet_ex11.png" />
+            </a>
+          </div>
+  <pre><code class="language-js">function clone(base) {
+  base.imports('input', (a, b, c, d) => {
+    let value = a + b + c + d
+    base.export('output', value)
+  })
+}
+let node = fl.node('input-array-port')
+node.in('add0').port('input').agent('clone', clone)
+node.agent('clone').ports('clone', '0').out('db_path0')
+node.agent('clone').ports('clone', '1').out('db_path1')
+node.agent('clone').ports('clone', '2').out('db_path2')
+node.agent('clone').ports('clone', '3').out('db_path3')
+// --or--
+// db_path => input clone(${msg_clone})
+// clone() clone[0] => db_path0
+// clone() clone[1] => db_path1
+// clone() clone[2] => db_path2
+// clone() clone[3] => db_path3</code></pre>
           <div style="text-align: center;">
             <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#input-array-port" target="_blank">
               <img src="subnet_ex15.png" />
