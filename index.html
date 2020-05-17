@@ -106,17 +106,19 @@ node.in('add3').ports('add', '3').agent('adder').port('output').out('output')
               <img src="subnet_ex13.png" />
             </a>
           </div>
-<pre><code class="language-js">function adder(flow) {
-  flow.imports('add', (a, b, c, d) => {
-    let value = a + b + c + d
-    flow.export('output', value)
+<pre><code class="language-js">function nand(flow) {
+  flow.imports('nand', (a, b) => {
+    if (a && b) {
+      flow.export('output', 0)
+    } else {
+      flow.export('output', 1)
+    }
   })
 }
 let node = fl.node('input-array-port')
-node.in('add0').ports('add', '0').agent('adder', adder)
-node.in('add1').ports('add', '1').agent('adder')
-node.in('add2').ports('add', '2').agent('adder')
-node.in('add3').ports('add', '3').agent('adder').port('output').out('output')
+node.in('input').port('input').agent('clone', clone)
+node.agent('clone').ports('clone', '0').ports('nand', 'a').agent('nand', nand)
+node.agent('clone').ports('clone', '1').ports('nand', 'b').agent('nand').port('output').out('output')
 // --or--
 // input => input clone(${msg_clone})
 // clone() clone[0] -> a nand(${maths_boolean_nand})
