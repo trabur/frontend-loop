@@ -39,7 +39,7 @@
     console.log(data)
   })
 }
-let data = fl.graph('operate-then-log')
+let data = fl.graph('data')
 data.type('boolean', true).port('a').agent('nand', nand)
 data.type('boolean', true).port('b').agent('nand').port('output')
   .port('input').agent('print', print)
