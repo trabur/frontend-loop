@@ -1,7 +1,7 @@
 import fl from '../bundle.js'
 
 export function adder(flow) {
-  flow.ints('add', (a, b, c, d) => {
+  flow.ins('add', (a, b, c, d) => {
     let value = a + b + c + d
     flow.out('output', value)
   })
