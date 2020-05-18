@@ -1,9 +1,9 @@
 import fl from '../bundle.js'
 
 export function adder(flow) {
-  flow.imports('add', (a, b, c, d) => {
+  flow.ints('add', (a, b, c, d) => {
     let value = a + b + c + d
-    flow.export('output', value)
+    flow.out('output', value)
   })
 }
 export let operate = fl.graph('operate')

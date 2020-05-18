@@ -1,8 +1,8 @@
 import fl from '../bundle.js'
 
 export function clone(flow) {
-  flow.import('input', (a) => {
-    flow.exports('clone', a, a, a, a)
+  flow.in('input', (a) => {
+    flow.outs('clone', a, a, a, a)
   })
 }
 export let duplicate = fl.graph('duplicate')

@@ -2,7 +2,7 @@ import fl from '../bundle.js'
 import { nand } from './not.js'
 
 export function print(flow) {
-  flow.import('input', (data) => {
+  flow.in('input', (data) => {
     console.log(data)
   })
 }

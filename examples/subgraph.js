@@ -1,7 +1,7 @@
 import fl from '../bundle.js'
 
 export function agent(flow) {
-  flow.import('input', (name) => {
+  flow.in('input', (name) => {
     console.log(`welcome, ${name}`)
   })
 }

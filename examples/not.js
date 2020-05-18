@@ -2,11 +2,11 @@ import fl from '../bundle.js'
 import { duplicate } from './duplicate.js'
 
 export function nand(flow) {
-  flow.imports('nand', (a, b) => {
+  flow.ins('nand', (a, b) => {
     if (a && b) {
-      flow.export('output', false)
+      flow.out('output', false)
     } else {
-      flow.export('output', true)
+      flow.out('output', true)
     }
   })
 }
