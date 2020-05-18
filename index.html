@@ -143,14 +143,29 @@ node.in('add3').ports('add', '3').agent('adder').port('output').out('output')
     }
   })
 }
-let node = fl.node('duplicate-then-operate')
+let node = fl.node('not')
 node.in('input').port('input').agent('clone', clone)
 node.agent('clone').ports('clone', '0').ports('nand', 'a').agent('nand', nand)
 node.agent('clone').ports('clone', '1').ports('nand', 'b').agent('nand').port('output').out('output')
+let not = node
 // --or--
 // input => input clone(${msg_clone})
 // clone() clone[0] -> a nand(${maths_boolean_nand})
 // clone() clone[1] -> b nand() output => output</code></pre>
+          <div style="text-align: center;">
+            <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#abstraction-powers" target="_blank">
+              <img src="subnet_ex14.png" />
+            </a>
+          </div>
+<pre><code class="language-js">let node = fl.node('abstraction')
+node.type('boolean', true).port('a').agent('nand', nand)
+node.type('boolean', true).port('b').agent('nand').port('output')
+  .port('input').subgraph('not', not).port('output').port('input').agent('print', print)
+// --or--
+// '${imsgTrue}' -> a nand(${maths_boolean_nand})
+// '${imsgTrue}' -> b nand()
+// nand() output -> input not(${maths_boolean_not})
+// not() output -> input print(${maths_boolean_print})</code></pre>
         </div>
       </div>
       <br />
