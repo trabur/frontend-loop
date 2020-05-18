@@ -25,7 +25,7 @@
             <h1 style="text-align: center; font-family: Open Sans, sans-serif; margin-bottom: 0;">Distributed Programming</h1>
             <div style="text-align: center;">
               <h2 style="margin-top: 0;">(with dataflow graphs)</h2>
-              <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc" target="_blank">
+              <a href="https://github.com/fractalide/fractalide/tree/master/nodes" target="_blank">
                 <img src="subnet_ex10.png" />
               </a>
             </div>
@@ -34,20 +34,7 @@
           <div class="wall">
             <div class="stones">
               <h2>the paradigm shift here is that we are coding the flow of data rather than the flow of control or logic. this level of abstraction and thinking requires that we make decisions about what Nodes and Edges are needed as dependancies. because of that each one of these graphs consists of an implementation and an interface. our interface is a simple library <a href="https://github.com/trabur/frontend-loop" target="_blank">coded</a> in JavaScript which describes the what and how of data flow through Agents and Subgraphs. we leave the final implementation up to the programmer.</h2>
-<pre><code class="language-js">function print(flow) {
-  flow.import('input', (data) => {
-    console.log(data)
-  })
-}
-let data = fl.graph('data')
-data.type('boolean', true).port('a').agent('nand', nand)
-data.type('boolean', true).port('b').agent('nand').port('output')
-  .port('input').agent('print', print)
-// --or--
-// nand(${maths_boolean_nand})
-// '${imsgTrue}' -> a nand()
-// '${imsgTrue}' -> b nand()
-// nand() output -> input io_print(${maths_boolean_print})</code></pre>
+              <pre><code id="data" class="language-js"></code></pre>
             </div>
           </div>
           <div class="foundation">
@@ -74,98 +61,31 @@ data.type('boolean', true).port('b').agent('nand').port('output')
               <img src="subnet_ex9.png" />
             </a>
           </div>
-<pre><code class="language-js">function agent(flow) {
-  flow.import('input', (name) => {
-    console.log(`welcome, ${name}`)
-  })
-}
-let subgraph = fl.graph('subgraph')
-subgraph.subgraph('subgraph', subgraph).port('output')
-  .port('input').agent('agent', agent)
-// --or--
-// subgraph(${name_of_subgraph})
-// agent(${name_of_agent})
-// subgraph() output -> input agent()</code></pre>
+          <pre><code id="subgraph" class="language-js"></code></pre>
           <div style="text-align: center;">
-            <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#input-array-port" target="_blank">
+            <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#output-array-port" target="_blank">
               <img src="subnet_ex11.png" />
             </a>
           </div>
-  <pre><code class="language-js">function clone(flow) {
-  flow.import('input', (a) => {
-    flow.exports('clone', a, a, a, a)
-  })
-}
-let duplicate = fl.graph('duplicate')
-duplicate.in('db_path').port('input').agent('clone', clone)
-duplicate.agent('clone').ports('clone', '0').out('db_path0')
-duplicate.agent('clone').ports('clone', '1').out('db_path1')
-duplicate.agent('clone').ports('clone', '2').out('db_path2')
-duplicate.agent('clone').ports('clone', '3').out('db_path3')
-// --or--
-// db_path => input clone(${msg_clone})
-// clone() clone[0] => db_path0
-// clone() clone[1] => db_path1
-// clone() clone[2] => db_path2
-// clone() clone[3] => db_path3</code></pre>
+          <pre><code id="duplicate" class="language-js"></code></pre>
           <div style="text-align: center;">
             <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#input-array-port" target="_blank">
               <img src="subnet_ex15.png" />
             </a>
           </div>
-<pre><code class="language-js">function adder(flow) {
-  flow.imports('add', (a, b, c, d) => {
-    let value = a + b + c + d
-    flow.export('output', value)
-  })
-}
-let operate = fl.graph('operate')
-operate.in('add0').ports('add', '0').agent('adder', adder)
-operate.in('add1').ports('add', '1').agent('adder')
-operate.in('add2').ports('add', '2').agent('adder')
-operate.in('add3').ports('add', '3').agent('adder').port('output').out('output')
-// --or--
-// add0 => add[0] adder(${path_to_adder})
-// add1 => add[1] adder()
-// add2 => add[2] adder()
-// add3 => add[3] adder() output => output</code></pre>
+          <pre><code id="operate" class="language-js"></code></pre>
           <div style="text-align: center;">
             <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#hierarchical-naming" target="_blank">
               <img src="subnet_ex13.png" />
             </a>
           </div>
-<pre><code class="language-js">function nand(flow) {
-  flow.imports('nand', (a, b) => {
-    if (a && b) {
-      flow.export('output', false)
-    } else {
-      flow.export('output', true)
-    }
-  })
-}
-let not = fl.graph('not')
-not.in('input').port('input').agent('clone', duplicate)
-not.agent('clone').ports('clone', '0').ports('nand', 'a').agent('nand', nand)
-not.agent('clone').ports('clone', '1').ports('nand', 'b').agent('nand').port('output').out('output')
-// --or--
-// input => input clone(${msg_clone})
-// clone() clone[0] -> a nand(${maths_boolean_nand})
-// clone() clone[1] -> b nand() output => output</code></pre>
+          <pre><code id="not" class="language-js"></code></pre>
           <div style="text-align: center;">
             <a href="https://github.com/fractalide/fractalide/blob/master/nodes/README.adoc#abstraction-powers" target="_blank">
               <img src="subnet_ex14.png" />
             </a>
           </div>
-<pre><code class="language-js">let abstraction = fl.graph('abstraction')
-abstraction.type('boolean', true).port('a').agent('nand', nand)
-abstraction.type('boolean', true).port('b').agent('nand').port('output')
-  .port('input').subgraph('not', not).port('output')
-  .port('input').agent('print', print)
-// --or--
-// '${imsgTrue}' -> a nand(${maths_boolean_nand})
-// '${imsgTrue}' -> b nand()
-// nand() output -> input not(${maths_boolean_not})
-// not() output -> input print(${maths_boolean_print})</code></pre>
+          <pre><code id="abstraction" class="language-js"></code></pre>
         </div>
       </div>
       <br />
@@ -177,5 +97,17 @@ abstraction.type('boolean', true).port('b').agent('nand').port('output')
       <br />
       <br />
     </div>
+    <script>
+      let code = ['data', 'subgraph', 'duplicate', 'operate', 'not', 'abstraction']
+      code.forEach((value) => {
+        let client = new XMLHttpRequest()
+        client.open('GET', `/examples/${value}.js`)
+        client.onreadystatechange = function() {
+          const html = Prism.highlight(client.responseText, Prism.languages.js, 'js')
+          document.getElementById(value).innerHTML = html
+        }
+        client.send()
+      })
+    </script>
   </body>
 </html>
