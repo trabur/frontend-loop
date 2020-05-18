@@ -35,8 +35,8 @@
             <div class="stones">
               <h2>the paradigm shift here is that we are coding the flow of data rather than the flow of control or logic. this level of abstraction and thinking requires that we make decisions about what Nodes and Edges are needed as dependancies. because of that each one of these graphs consists of an implementation and an interface. our interface is a simple library <a href="https://github.com/trabur/frontend-loop" target="_blank">coded</a> in JavaScript which describes the what and how of data flow through Agents and Subgraphs. we leave the final implementation up to the programmer.</h2>
 <pre><code class="language-js">function print(flow) {
-  flow.import('input', (name) => {
-    console.log(`welcome, ${name}`)
+  flow.import('input', (data) => {
+    console.log(data)
   })
 }
 let node = fl.node('operate-then-log')
