@@ -6,7 +6,7 @@ export function print(flow) {
     console.log(data)
   })
 }
-export let data = fl.graph('operate-then-log')
+export let data = fl.graph('data')
 data.type('boolean', true).port('a').agent('nand', nand)
 data.type('boolean', true).port('b').agent('nand').port('output')
   .port('input').agent('print', print)
