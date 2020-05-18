@@ -39,7 +39,7 @@
     console.log(data)
   })
 }
-let node = fl.node('operate-then-log')
+let node = fl.graph('operate-then-log')
 node.type('boolean', true).port('a').agent('nand', nand)
 node.type('boolean', true).port('b').agent('nand').port('output').port('input').agent('print', print)
 // --or--
@@ -78,7 +78,7 @@ node.type('boolean', true).port('b').agent('nand').port('output').port('input').
     console.log(`welcome, ${name}`)
   })
 }
-let node = fl.node('initialize')
+let node = fl.graph('initialize')
 node.subgraph('subgraph', subgraph)
 node.agent('agent', agent)
 node.subgraph('subgraph').port('output').port('input').agent('agent')
@@ -96,7 +96,7 @@ node.subgraph('subgraph').port('output').port('input').agent('agent')
     flow.exports('clone', a, a, a, a)
   })
 }
-let node = fl.node('duplicate')
+let node = fl.graph('duplicate')
 node.in('db_path').port('input').agent('clone', clone)
 node.agent('clone').ports('clone', '0').out('db_path0')
 node.agent('clone').ports('clone', '1').out('db_path1')
@@ -119,7 +119,7 @@ node.agent('clone').ports('clone', '3').out('db_path3')
     flow.export('output', value)
   })
 }
-let node = fl.node('operate')
+let node = fl.graph('operate')
 node.in('add0').ports('add', '0').agent('adder', adder)
 node.in('add1').ports('add', '1').agent('adder')
 node.in('add2').ports('add', '2').agent('adder')
@@ -143,7 +143,7 @@ node.in('add3').ports('add', '3').agent('adder').port('output').out('output')
     }
   })
 }
-let node = fl.node('not')
+let node = fl.graph('not')
 node.in('input').port('input').agent('clone', clone)
 node.agent('clone').ports('clone', '0').ports('nand', 'a').agent('nand', nand)
 node.agent('clone').ports('clone', '1').ports('nand', 'b').agent('nand').port('output').out('output')
@@ -157,7 +157,7 @@ let not = node
               <img src="subnet_ex14.png" />
             </a>
           </div>
-<pre><code class="language-js">let node = fl.node('abstraction')
+<pre><code class="language-js">let node = fl.graph('abstraction')
 node.type('boolean', true).port('a').agent('nand', nand)
 node.type('boolean', true).port('b').agent('nand').port('output')
   .port('input').subgraph('not', not).port('output').port('input').agent('print', print)
