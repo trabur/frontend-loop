@@ -1,0 +1,68 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+  <title>Compound nodes</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.15.0/cytoscape.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.15.0/cytoscape.min.js"></script>
+  <style>
+    #cy {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+  <body>
+    <div id="cy"></div>
+    <script>
+      let url = '/examples/data.json'
+
+      fetch(url)
+        .then(res => res.json())
+        .then((res) => {
+          console.log('flow: ', res)
+          render(res)
+        })
+        .catch(err => { throw err })
+
+      function render(elements) {
+        let cy = window.cy = cytoscape({
+          container: document.getElementById('cy'),
+          boxSelectionEnabled: false,
+          style: [
+            {
+              selector: 'node',
+              css: {
+                'content': 'data(id)',
+                'text-valign': 'center',
+                'text-halign': 'center'
+              }
+            },
+            {
+              selector: ':parent',
+              css: {
+                'text-valign': 'top',
+                'text-halign': 'center',
+              }
+            },
+            {
+              selector: 'edge',
+              css: {
+                'curve-style': 'bezier',
+                'target-arrow-shape': 'triangle'
+              }
+            }
+          ],
+          elements,
+          layout: {
+            name: 'preset',
+            padding: 5
+          }
+        })
+      }
+    </script>
+  </body>
+</html>
